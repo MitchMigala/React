@@ -1,0 +1,24 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "This is a directory for learning React",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run lite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MitchMigala/React.git"
+  },
+  "author": "Mitch Migala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MitchMigala/React/issues"
+  },
+  "homepage": "https://github.com/MitchMigala/React#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
