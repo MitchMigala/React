@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import Main from './MainComponent' ;
 
 class DishdetailComponent extends Component {
 
@@ -77,3 +78,76 @@ class DishdetailComponent extends Component {
     }
 }
 export default DishdetailComponent;
+
+
+
+
+/*
+import React, {Component} from 'react';
+import {Card, CardImg, CardText, CardBody,CardTitle} from 'reactstrap';
+
+
+
+
+class DishDetail extends Component {
+
+
+    render(){
+        const dish = this.props.dish ;
+        
+           
+           const comm = this.props.dish.comments.map((Komm) => {
+
+
+            if (Komm.comment != null){
+
+                return(    
+                    <div key={Komm.id} className="col-12 border-0 m-0">
+                        <li className="list-group-item border-0 m-1 p-1">
+                            
+                            <span>{Komm.comment}<br />
+                            
+                            --{Komm.author}, { new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(Komm.date)))}
+                            </span>
+                            </li>
+
+                    </div>
+                
+                );
+
+            }else{
+                return(
+                    <div></div>
+                );
+            }
+        });
+
+            return(
+            <div className="row">
+                <div  className="col-md-5 m-1">
+                    <Card>
+                        <CardImg width="100%" object="true" src={this.props.dish.image} alt={this.props.dish.name}/>
+                        <CardBody>
+                            <CardTitle heading="true">{this.props.dish.name}</CardTitle>
+                            <CardText>{this.props.dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </div>
+
+                <div className="col-md-5 m-1">
+                <h4>Comments:</h4>
+                    <ul className="list-group list-group-flush">
+                    {comm}
+                    </ul>
+                    
+                </div>
+            </div>
+                
+            );
+   
+        }
+
+}
+
+export default DishDetail;
+*/
