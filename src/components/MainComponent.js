@@ -17,7 +17,10 @@ class Main extends Component {
   onDishSelect(dishId){
     this.setState({selectedDish: dishId});
 }
+
 render(){
+  console.log("Main component render method is invoked");
+
   return (
     <div>
       <Navbar dark color="primary">
