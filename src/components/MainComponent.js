@@ -3,7 +3,7 @@ import {Component} from 'react';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Menu from './MenuComponent';
-import DishDetail from './DishdetailComponent';
+import DishDetailComponent from './DishDetailComponent';
 import { DISHES } from '../shared/dishes';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
@@ -39,6 +39,14 @@ render(){
     );
   }
 
+  const DishWithId = ({match}) => {
+    console.log(parseInt(match.params.dishId,10));
+    return(
+<DishDetailComponent dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+            comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+    );
+
+  }
 
   return (
     <div>
@@ -46,6 +54,7 @@ render(){
       <Switch>
           <Route path="/home" component={HomePage} />
           <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+          <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
       </Switch>
