@@ -7,7 +7,7 @@ function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <div className="row">
+            <div className="row" key={leader.id}>
                 <div className="col-10 m-4">
                     <Media tag='li'>
                         <Media left top href="#" className="m-4">
