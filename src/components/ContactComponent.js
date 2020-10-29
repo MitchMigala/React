@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Label, Button, Row, Col } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form'
+import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Link} from 'react-router-dom';
+
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -89,9 +90,6 @@ class Contact extends Component{
                                             minLength: "Must be greater than 2 characters ",
                                             maxLength: "Must be less than 15 characters"
                                         }}/>
-
-                                   
-                                    
                                 </Col>
                             </Row>
                             <Row className="form-group">

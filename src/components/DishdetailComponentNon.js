@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 import Main from './MainComponent' ;
+import {CommentFormComponent} from './CommentFormComponent';
+
 
 class DishdetailComponent extends Component {
 
@@ -27,6 +29,7 @@ class DishdetailComponent extends Component {
                     <ul className="list-unstyled">
                         {cmts}
                     </ul>
+                    <CommentFormComponent ></CommentFormComponent>
                 </div>
             );
         }
@@ -67,6 +70,7 @@ class DishdetailComponent extends Component {
                 <div className="row">
                     {dishDisplay}
                     {commentDisplay}
+                    
                 </div>
             );
         }
