@@ -2,27 +2,46 @@ import React, {Component} from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { Modal, ModalHeader, ModalBody, Button, Form, Input,Label, Row, Col } from 'reactstrap';
-import Main from './MainComponent' ;
+import { Modal, ModalHeader, ModalBody, Button,Label, Row, Col } from 'reactstrap';
+
+
 
 //import CommentFormComponent from './CommentFormComponent' ;
 
 
-
-function DishDetailComponent({dish, comments}) {
-
-    const comms = comments.map(comment => {
-        return (
-            <li className="list-group-item border-0" key={comment.id} >
-                <span>{comment.comment} <br />
-                --{comment.author},
+function RenderComments({comments}) {
+ 
+    if(comments !== null || undefined) 
+        return(
+            
+            comments.map(comment => {
+                    return (
+                        <li className="list-group-item border-0" key={comment.id} >
+                            <span>{comment.comment} <br />
+                            --{comment.author},
+                            
+                            {new Intl.DateTimeFormat('en-US', 
+                            {year: 'numeric',month: 'short',day: '2-digit'}).format(new Date(comment.date))}
+                            </span>
+                        </li>
+                    );
+                    
+                })
                 
-                {new Intl.DateTimeFormat('en-US', 
-                {year: 'numeric',month: 'short',day: '2-digit'}).format(new Date(comment.date))}
-                </span>
-            </li>
-        );
-    })
+          
+        )
+    
+
+
+    
+}
+
+
+function DishDetailComponent({dish, comments, addComment}) {
+
+    alert("dishDetailComp.. dish contains  " + dish.id + " comments  " + comments + " addcomment   " + addComment);
+
+
 
     return(
         <div className="container">
@@ -50,8 +69,11 @@ function DishDetailComponent({dish, comments}) {
                     <div className="col-12 col-md-5 m-1">
                         <Card>
                             <CardBody>
-                                <CardText>{comms}</CardText>
-                                <CommentFormComponent/>
+                                <CardText>
+                                    <RenderComments dish={dish} addComment={addComment} comments={comments} />
+                                    <CommentFormComponent addComment={addComment} dishId={dish.id}/>
+                                </CardText>
+                                
                             </CardBody>
                         </Card>
                     </div>
@@ -67,6 +89,8 @@ const minLength = (len) => (val) => val && (val.length >= len);
 
 class CommentFormComponent extends Component{
 
+
+
     constructor(props){
         super(props);
         this.state = {
@@ -80,9 +104,13 @@ class CommentFormComponent extends Component{
     }
 
     handleSubmit(values){
-        console.log("Current state is: " + JSON.stringify(values) )
-        alert("Current state is: " + JSON.stringify(values))
+        
+        this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
 
+        this.toggleModal();
+
+    
+        
     }
 
     toggleModal(){
@@ -118,25 +146,34 @@ class CommentFormComponent extends Component{
                                         </Control.select>
                                     </Col>
                                 </Row>
+
                                 <Row className="form-group">
-                                   <Col><Label htmlFor="yourname">Your Name</Label></Col>
-                                    <Col md={12}>
-                                        <Control.text model=".yourname" id="yourname"
-                                        className="form-control" 
-                                        validators={{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                    <Col><Label className="m3" htmlFor="yourname"> Your Name</Label></Col>
+                                    <Col md={{size:12, offset:0}}>
+                                        <Control.text model=".yourname" name="yourname"
+                                            className="form-control"
+                                            id="yourname"
+                                            placeholder="Your name"
+                                            validators={{
+                                                required, minLength: minLength(3), maxLength: maxLength(15)
+                                            }}
+                                            />
+                                        <Errors
+                                        className="text-danger"
+                                        model=".yourname"
+                                        
+                                        messages={{
+                                            required: 'Required ',
+                                            minLength: 'Must be 3 characters or more ',
+                                            maxLength: 'Must be 15 characters or less',
+
                                         }}
-                                        placeholder="Your Name"
-                                        name="yourname"/>
-                                        <Errors className="text-danger"
-                                            model=".yourname"
-                                            messages={{
-                                                required: "Required ",
-                                                minLength: "Must be greater than 2 characters ",
-                                                maxLength: "Must be less than 15 characters"
-                                            }}/>
+                                     />
                                     </Col>
                                 </Row>
+
+
+
                                 <Row className="form-group">
                                    <Col> <Label htmlFor="comment">Comment</Label></Col>
                                     <Col md={12}>
