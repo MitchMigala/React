@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrum
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Modal, ModalHeader, ModalBody, Button,Label, Row, Col } from 'reactstrap';
+import { Loading } from './LoadingComponent';
 
 
 
@@ -31,18 +32,35 @@ function RenderComments({comments}) {
           
         )
     
-
-
-    
 }
 
 
-function DishDetailComponent({dish, comments, addComment}) {
+function DishDetailComponent({dish, comments, addComment, isLoading, errMess}) {
 
-    alert("dishDetailComp.. dish contains  " + dish.id + " comments  " + comments + " addcomment   " + addComment);
+    //alert("dishDetailComp.. dish contains  " + dish.id + " comments  " + comments + " addcomment   " + addComment);
 
+    if (isLoading) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+            
+        );
+    }
+    else if(errMess){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h4>{errMess}</h4>
+                </div>
+            </div>
+            
+        );
+    }
 
-
+    else if(dish != null)
     return(
         <div className="container">
             <div className="row">
