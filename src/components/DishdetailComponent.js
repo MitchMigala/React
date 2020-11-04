@@ -8,6 +8,7 @@ import { baseUrl} from '../shared/baseUrl';
 
 
 
+
 //import CommentFormComponent from './CommentFormComponent' ;
 
 
@@ -34,7 +35,7 @@ function RenderComments({comments}) {
     
 }
 
-function DishDetailComponent({dish, comments, addComment, isLoading, errMess}) {
+function DishDetailComponent({dish, comments, postComment, isLoading, errMess}) {
 
     //alert("dishDetailComp.. dish contains  " + dish.id + " comments  " + comments + " addcomment   " + addComment);
 
@@ -87,8 +88,8 @@ function DishDetailComponent({dish, comments, addComment, isLoading, errMess}) {
                         <Card>
                             <CardBody>
                                 <CardText>
-                                    <RenderComments dish={dish} addComment={addComment} comments={comments} />
-                                    <CommentFormComponent addComment={addComment} dishId={dish.id}/>
+                                    <RenderComments dish={dish} postComment={postComment} comments={comments} />
+                                    <CommentFormComponent postComment={postComment} dishId={dish.id}/>
                                 </CardText>
                                 
                             </CardBody>
@@ -122,7 +123,7 @@ class CommentFormComponent extends Component{
 
     handleSubmit(values){
         
-        this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.yourname, values.comment);
 
         this.toggleModal();
 
