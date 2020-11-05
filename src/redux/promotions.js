@@ -22,6 +22,6 @@ export const Promotions = (state = {
                 ...state, isLoading: false, errMess: action.payload , promotions: []
             };
         default:
-            return state;
+        return state;
     }
 }

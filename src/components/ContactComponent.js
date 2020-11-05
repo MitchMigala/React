@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Label, Button, Row, Col } from 'reactstrap';
-import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 import {Link} from 'react-router-dom';
 
 
@@ -19,8 +19,10 @@ class Contact extends Component{
     }
 
     handleSubmit(values){
-        console.log("Current state is: " + JSON.stringify(values) )
-        alert("Current state is: " + JSON.stringify(values))
+        //console.log("Current state is: " + JSON.stringify(values) )
+       // alert("Current state is: " + JSON.stringify(values));
+       // alert("firstname has " + values.firstname);
+        this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.agree,values.contactType,values.message);
         this.props.resetFeedbackForm();
 
     }
@@ -165,7 +167,7 @@ class Contact extends Component{
                                     </div>
                                 </Col>
                                 <Col md={{size:3, offset:1}}>
-                                    <Control.select model=".contacType" name="contactType"
+                                    <Control.select model=".contactType" name="contactType"
                                         className="form-control">
                                         <option>Tel.</option>
                                         <option>Email</option>
